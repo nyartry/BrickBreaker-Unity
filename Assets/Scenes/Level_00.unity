@@ -885,6 +885,12 @@ PrefabInstance:
       propertyPath: autoPlay
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6433894484666640506, guid: 453c430308f1f20499d51cb90499d2fb,
+        type: 3}
+      propertyPath: ballPrefab
+      value: 
+      objectReference: {fileID: 4308555479211136565, guid: 80e7d9a8de515344bb43b914eedcb517,
+        type: 3}
     - target: {fileID: 8277929774588792663, guid: 453c430308f1f20499d51cb90499d2fb,
         type: 3}
       propertyPath: m_Name
@@ -1042,8 +1048,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4308555479211136565, guid: 80e7d9a8de515344bb43b914eedcb517,
         type: 3}
-      propertyPath: m_Layer
-      value: 8
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4308555479211136568, guid: 80e7d9a8de515344bb43b914eedcb517,
         type: 3}
@@ -2988,6 +2994,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bcc2ab7de9d5c544abb1221dad9a9d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onItemCollectedShotgunBurst:
+    m_PersistentCalls:
+      m_Calls: []
+  onItemCollectedDivision:
+    m_PersistentCalls:
+      m_Calls: []
+  itemType: 2
   Speed: 10
 --- !u!4 &5016988082348431369
 Transform:
@@ -3667,6 +3680,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Scene Movement Animator
+      objectReference: {fileID: 0}
+    - target: {fileID: 7868970648858109230, guid: 203e5e3e3f03a994cb0ac30321e3b553,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7868970649264097877, guid: 203e5e3e3f03a994cb0ac30321e3b553,
         type: 3}
