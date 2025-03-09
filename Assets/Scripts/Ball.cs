@@ -25,6 +25,13 @@ public class Ball : MonoBehaviour
 		gameManager = GameObject.FindObjectOfType<GameManager>();
 		paddle = GameObject.FindObjectOfType<Paddle>();
 		ballBody = GetComponent<Rigidbody2D>();
+
+		if(gameManager.IsBallServed())
+		{
+
+			FirstServeBall(new Vector3(0, 1, 0));
+		}
+
 	}
 
 	public void AddForce(Vector2 force)

@@ -52,16 +52,6 @@ public class GameManager : MonoBehaviour
 		Destroy(GameObject.Find("Instruction Text"));
 		Cursor.visible = false;
 
-		//Vector3 ballPosition = Camera.main.WorldToScreenPoint(ball.Position); // ball position in Screenpoint
-
-		//// Caculate the direction
-		//Vector3 direction = (mousePosition - ballPosition);
-		//direction = direction.normalized;
-
-		//Vector2 force = new Vector2(direction.x * ballSpeed, direction.y * ballSpeed);
-
-		//ball.AddForce(force);
-
 		ball.FirstServeBall(mousePosition);
 	}
 
