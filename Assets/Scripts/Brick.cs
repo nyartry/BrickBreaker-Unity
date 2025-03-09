@@ -53,8 +53,17 @@ public class Brick : MonoBehaviour
 			particle.transform.position = transform.position;
 			main.startColor = gameObject.GetComponent<SpriteRenderer>().color;
 			particle.Play(); // Play effect when a brick is destroyed
+
+
 			//アイテムをスポーン
-			Instantiate(itemPrefab, transform.position, Quaternion.identity);
+			//10分の１でアイテムが出て、そのうち、5分の１でDivisionが出る。5分の4でShotgunBurstが出る。
+			int randomSpawn = Random.Range(0, 10);
+			if(randomSpawn == 0)
+			{
+				var item = Instantiate(itemPrefab, transform.position, Quaternion.identity);
+				int randomType = Random.Range(0, 5);
+				item.GetComponent<Item>().ItemType = randomType == 0 ? ItemType.Division : ItemType.ShotgunBurst;
+			}
 
 			Destroy(gameObject);
 			BricksManager.DestroyBrick(); // Decrease number of breakable bricks remaining by 1
