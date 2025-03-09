@@ -17,7 +17,7 @@ public class Paddle : MonoBehaviour
     {
         gameManager = FindObjectOfType<GameManager>();
         Ball = FindObjectOfType<Ball>();
-        audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
+        audioManager = AudioManager.Instance.GetComponent<AudioManager>();
 
         // Restrict paddle position
         zDistance = transform.position.z - Camera.main.transform.position.z;

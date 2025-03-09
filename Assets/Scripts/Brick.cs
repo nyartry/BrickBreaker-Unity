@@ -18,7 +18,7 @@ public class Brick : MonoBehaviour
         hitTimes = 0;
         BricksManager = GameObject.FindObjectOfType<BricksManager>();
         particle = GameObject.Find("Breaking Effect").GetComponent<ParticleSystem>();
-        AudioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
+        AudioManager = AudioManager.Instance;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

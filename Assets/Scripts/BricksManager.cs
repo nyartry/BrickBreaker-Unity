@@ -22,7 +22,7 @@ public class BricksManager : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.FindObjectOfType<GameManager>();
-        audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
+        audioManager = AudioManager.Instance.GetComponent<AudioManager>();
         soundNotPlayed = true;
        
     }

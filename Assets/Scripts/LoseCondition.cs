@@ -11,7 +11,7 @@ public class LoseCondition : MonoBehaviour
     {
         gameManager = GameObject.FindObjectOfType<GameManager>();
         BricksManager = GameObject.FindObjectOfType<BricksManager>();
-        audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
+        audioManager = AudioManager.Instance;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

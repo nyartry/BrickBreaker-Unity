@@ -26,6 +26,20 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField] private AudioMixer audioMixer;
     private static AudioManager instance = null; // Only one instance of AudioManager can exist at the same time
+    // 外部からインスタンスを取得するためのプロパティ
+    public static AudioManager Instance
+    {
+        get
+		{
+			if(instance == null)
+			{
+				GameObject prefab = Resources.Load<GameObject>("AudioManager"); //Resourcesからプレハブをロード
+				instance = prefab.AddComponent<AudioManager>(); // ここでAwake()が呼ばれる
+			}
+			return instance;
+		}
+	}
+
     private void Awake()
     {
         // If there is no instance of AudioManger currently
