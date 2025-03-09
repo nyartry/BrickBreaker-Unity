@@ -45,9 +45,6 @@ public class LevelManager : MonoBehaviour
         {
             StartCoroutine(SceneMovementAnm(name));
         }
-       
-        
-        
     }
     public void RetryLevel()
     {

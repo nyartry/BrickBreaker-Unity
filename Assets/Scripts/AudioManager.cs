@@ -33,8 +33,9 @@ public class AudioManager : MonoBehaviour
 		{
 			if(instance == null)
 			{
-				GameObject prefab = Resources.Load<GameObject>("AudioManager"); //Resourcesからプレハブをロード
-				instance = prefab.AddComponent<AudioManager>(); // ここでAwake()が呼ばれる
+				GameObject prefab = Resources.Load<GameObject>("Audio Manager"); //Resourcesからプレハブをロード
+				GameObject obj = Instantiate(prefab); //プレハブからインスタンスを作成
+				instance = obj.GetComponent<AudioManager>();
 			}
 			return instance;
 		}
@@ -56,27 +57,27 @@ public class AudioManager : MonoBehaviour
 
     public void PlayBreakableHitAudio()
     {
-        breakableBrickHit.Play();
+		instance.breakableBrickHit.Play();
     }
     public void PlayUnbreakableHitAudio()
     {
-        unbreakableBrick_paddleHit.Play();
+		instance.unbreakableBrick_paddleHit.Play();
     }
     public void PlayFailingAudio()
     {
-        fail.Play();
+		instance.fail.Play();
     }
     public void PlayClearingLevelAudio()
     {
-        clearLevel.Play();
+		instance.clearLevel.Play();
     }
     public void PlayMouseHoverUIAudio()
     {
-        UIhover.Play();
+		instance.UIhover.Play();
     }
     public void PlayMouseClickUIAudio()
     {
-        UIclick.Play();
+		instance.UIclick.Play();
     }
     // Add more function to play audio below
     // ...
@@ -86,11 +87,11 @@ public class AudioManager : MonoBehaviour
     {
         if (PlayerPrefs.HasKey("MusicVolume"))
         {
-            audioMixer.SetFloat("MusicVolume", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
+			instance.audioMixer.SetFloat("MusicVolume", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
         }
         if (PlayerPrefs.HasKey("SFXVolume"))
         {
-            audioMixer.SetFloat("SFXVolume", Mathf.Log10(PlayerPrefs.GetFloat("SFXVolume")) * 20);
+			instance.audioMixer.SetFloat("SFXVolume", Mathf.Log10(PlayerPrefs.GetFloat("SFXVolume")) * 20);
         }
     }
     void Start()
