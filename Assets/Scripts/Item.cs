@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Assertions;
-
+using UnityEngine.UI;
 
 public enum ItemType
 {
-	None,
 	ShotgunBurst,
 	Division,
 }
@@ -24,7 +23,7 @@ public class Item : MonoBehaviour
 	private Paddle paddle;
 
 	[SerializeField]
-	private ItemType itemType = ItemType.None;
+	private ItemType itemType;
 
 	public ItemType ItemType // ここでエラー
 	{
@@ -37,16 +36,22 @@ public class Item : MonoBehaviour
 
 	private Rigidbody2D body;
 
+	[SerializeField]
+	private Sprite[] images;
+
 	// Start is called before the first frame update
 	void Start()
 	{
+
 		body = GetComponent<Rigidbody2D>();
 		Drop(new Vector3(0, -1, 0));
-
 
 		paddle = GameObject.FindObjectOfType<Paddle>();
 		onItemCollectedShotgunBurst.AddListener(()=> { paddle.onItemCollectedShotgunBurst.Invoke(); });
 		onItemCollectedDivision.AddListener(() => { paddle.onItemCollectedDivision.Invoke(); });
+
+
+		GetComponent<SpriteRenderer>().sprite = images[(int)ItemType];
 
 	}
 
@@ -99,7 +104,7 @@ public class Item : MonoBehaviour
 				onItemCollectedDivision.Invoke();
 				break;
 			default:
-				Assert.AreNotEqual(ItemType, ItemType.None);
+				Assert.IsTrue(false);
 				break;
 		}
 

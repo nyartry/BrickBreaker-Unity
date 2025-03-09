@@ -3000,8 +3000,11 @@ MonoBehaviour:
   onItemCollectedDivision:
     m_PersistentCalls:
       m_Calls: []
-  itemType: 2
+  itemType: 0
   Speed: 10
+  images:
+  - {fileID: 21300000, guid: a03c949c31ed2704f98dc3c5c8e7bfd1, type: 3}
+  - {fileID: 21300000, guid: 09b6af4a45fc129449998982ef3caf49, type: 3}
 --- !u!4 &5016988082348431369
 Transform:
   m_ObjectHideFlags: 0
