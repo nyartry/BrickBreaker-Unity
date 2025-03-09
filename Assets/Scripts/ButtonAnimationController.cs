@@ -8,9 +8,9 @@ public class ButtonAnimationController : MonoBehaviour
     private Animator animator;
     private AudioManager audioManager;
     private void Start()
-    {
-        audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
-        animator = GetComponent<Animator>();
+	{
+		audioManager = AudioManager.Instance.GetComponent<AudioManager>();
+		animator = GetComponent<Animator>();
     }
     public void OnCursorEnter()
     {
