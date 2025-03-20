@@ -24,14 +24,25 @@ public class BricksGenerator : MonoBehaviour
 		{
 			for(int y = 0; y < levelMap.height; y += (int)blockSize)
 			{
-				Color pixelColor = GetAverageColor(levelMap, x, y, (int)blockSize);
 				Vector2 worldPos = new Vector2(startPosition.x + x * 0.01f, startPosition.y + y * 0.01f);
 
-				if(pixelColor == Color.green)
+				//Color pixelColor = GetAverageColor(levelMap, x, y, (int)blockSize);
+
+				//if(pixelColor == Color.green)
+				//{
+				//	Instantiate(greenBlockPrefab, worldPos, Quaternion.identity, transform);
+				//}
+				//else if(pixelColor == Color.black)
+				//{
+				//	Instantiate(blackBlockPrefab, worldPos, Quaternion.identity, transform);
+				//}
+
+
+				if(ContainsColor(levelMap, x, y, (int)blockSize, Color.green))
 				{
 					Instantiate(greenBlockPrefab, worldPos, Quaternion.identity, transform);
 				}
-				else if(pixelColor == Color.black)
+				else if(ContainsColor(levelMap, x, y, (int)blockSize, Color.black))
 				{
 					Instantiate(blackBlockPrefab, worldPos, Quaternion.identity, transform);
 				}
@@ -64,4 +75,25 @@ public class BricksGenerator : MonoBehaviour
 
 		return count > 0 ? sumColor / count : Color.clear;
 	}
+	bool ContainsColor(Texture2D texture, int startX, int startY, int size, Color targetColor)
+	{
+		for(int x = startX; x < startX + size; x++)
+		{
+			if(x >= texture.width)
+				break;
+
+			for(int y = startY; y < startY + size; y++)
+			{
+				if(y >= texture.height)
+					break;
+
+				if(texture.GetPixel(x, y) == targetColor)
+				{
+					return true; // 1ピクセルでも該当色があれば即座にtrueを返す
+				}
+			}
+		}
+		return false; // 1つも該当しなかった場合はfalse
+	}
+
 }
