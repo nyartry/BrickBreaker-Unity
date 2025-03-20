@@ -372,12 +372,12 @@ PrefabInstance:
     - target: {fileID: 6236494959857025962, guid: fd1de77cab1dd9b4585fb69789eb5a1f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -5.4
+      value: -5.12
       objectReference: {fileID: 0}
     - target: {fileID: 6236494959857025962, guid: fd1de77cab1dd9b4585fb69789eb5a1f,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 9.262
+      value: 9.5
       objectReference: {fileID: 0}
     - target: {fileID: 6236494959857025962, guid: fd1de77cab1dd9b4585fb69789eb5a1f,
         type: 3}
@@ -617,7 +617,6 @@ MonoBehaviour:
   blackBlockPrefab: {fileID: 9003314630169864470, guid: b8a889f6f18aad549971e2cdaaf18357,
     type: 3}
   blockSize: 100
-  startPosition: {x: -5.4, y: -9.6}
 --- !u!4 &582487597
 Transform:
   m_ObjectHideFlags: 0
@@ -913,7 +912,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1651103996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1089,7 +1088,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1833648016}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
