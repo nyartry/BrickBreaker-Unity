@@ -2,15 +2,36 @@
 
 public class BricksGenerator : MonoBehaviour
 {
-	[SerializeField] private Texture2D levelMap; // 画像をアタッチ
+	[SerializeField] private Texture2D levelMap;
 	[SerializeField] private GameObject greenBlockPrefab;
 	[SerializeField] private GameObject blackBlockPrefab;
-	[SerializeField] private float blockSize = 100f; // ブロックの間隔
-	[SerializeField] private Vector2 startPosition = new Vector2(-540, -960); // 左上を基準とする
+	[SerializeField] private float blockSize = 100f;
+
+	private Vector2 startPosition;
+	private const float PIXEL_TO_WORLD = 0.01f; // 100px → 1 unit
+	private float halfBlockOffset;
 
 	void Start()
 	{
+		CalculateStartPosition();
+		halfBlockOffset = blockSize * 0.5f * PIXEL_TO_WORLD; // 事前計算
 		GenerateBricks();
+	}
+
+	void CalculateStartPosition()
+	{
+		Camera cam = Camera.main;
+		if(cam == null)
+		{
+			Debug.LogError("Main Camera not found!");
+			return;
+		}
+
+		float cameraHeight = cam.orthographicSize * 2f; // 縦のワールド範囲
+		float cameraWidth = cameraHeight * cam.aspect; // 横のワールド範囲
+
+		// 左上のワールド座標を計算
+		startPosition = new Vector2(-cameraWidth / 2f, -cameraHeight / 2f);
 	}
 
 	void GenerateBricks()
@@ -20,80 +41,43 @@ public class BricksGenerator : MonoBehaviour
 			Debug.LogError("Level map image is not set.");
 			return;
 		}
+
 		for(int x = 0; x < levelMap.width; x += (int)blockSize)
 		{
 			for(int y = 0; y < levelMap.height; y += (int)blockSize)
 			{
-				Vector2 worldPos = new Vector2(startPosition.x + x * 0.01f, startPosition.y + y * 0.01f);
+				Vector2 worldPos = GetWorldPosition(x, y);
 
-				//Color pixelColor = GetAverageColor(levelMap, x, y, (int)blockSize);
-
-				//if(pixelColor == Color.green)
-				//{
-				//	Instantiate(greenBlockPrefab, worldPos, Quaternion.identity, transform);
-				//}
-				//else if(pixelColor == Color.black)
-				//{
-				//	Instantiate(blackBlockPrefab, worldPos, Quaternion.identity, transform);
-				//}
-
-
-				if(ContainsColor(levelMap, x, y, (int)blockSize, Color.green))
-				{
+				if(IsColorPresent(levelMap, x, y, (int)blockSize, Color.green))
 					Instantiate(greenBlockPrefab, worldPos, Quaternion.identity, transform);
-				}
-				else if(ContainsColor(levelMap, x, y, (int)blockSize, Color.black))
-				{
+				else if(IsColorPresent(levelMap, x, y, (int)blockSize, Color.black))
 					Instantiate(blackBlockPrefab, worldPos, Quaternion.identity, transform);
-				}
 			}
 		}
 	}
 
-	Color GetAverageColor(Texture2D texture, int startX, int startY, int size)
+	Vector2 GetWorldPosition(int x, int y)
 	{
-		Color sumColor = Color.clear;
-		int count = 0;
-
-		for(int x = startX; x < startX + size; x++)
-		{
-			if(x >= texture.width)
-			{
-				break; // 画像の幅を超えたら終了
-			}
-
-			for(int y = startY; y < startY + size; y++)
-			{
-				if(y >= texture.height)
-				{
-					break; // 画像の高さを超えたら終了
-				}
-				sumColor += texture.GetPixel(x, y);
-				count++;
-			}
-		}
-
-		return count > 0 ? sumColor / count : Color.clear;
+		return startPosition + new Vector2(x, y) * PIXEL_TO_WORLD + Vector2.one * halfBlockOffset;
 	}
-	bool ContainsColor(Texture2D texture, int startX, int startY, int size, Color targetColor)
+
+	bool IsColorPresent(Texture2D texture, int startX, int startY, int size, Color targetColor, float tolerance = 0.01f)
 	{
-		for(int x = startX; x < startX + size; x++)
+		for(int x = startX; x < startX + size && x < texture.width; x++)
 		{
-			if(x >= texture.width)
-				break;
-
-			for(int y = startY; y < startY + size; y++)
+			for(int y = startY; y < startY + size && y < texture.height; y++)
 			{
-				if(y >= texture.height)
-					break;
-
-				if(texture.GetPixel(x, y) == targetColor)
-				{
-					return true; // 1ピクセルでも該当色があれば即座にtrueを返す
-				}
+				if(ColorMatch(texture.GetPixel(x, y), targetColor, tolerance))
+					return true;
 			}
 		}
-		return false; // 1つも該当しなかった場合はfalse
+		return false;
 	}
 
+	bool ColorMatch(Color a, Color b, float tolerance)
+	{
+		return Mathf.Abs(a.r - b.r) < tolerance &&
+			   Mathf.Abs(a.g - b.g) < tolerance &&
+			   Mathf.Abs(a.b - b.b) < tolerance;
+	}
 }
