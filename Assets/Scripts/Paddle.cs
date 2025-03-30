@@ -12,6 +12,7 @@ public class Paddle : MonoBehaviour
 
 	private AudioManager audioManager;
 	private GameManager gameManager;
+	private BallManager ballManager;
 	private float mouseXPos;
 	private float ballPos;
 	[SerializeField]
@@ -30,10 +31,10 @@ public class Paddle : MonoBehaviour
 		gameManager = FindObjectOfType<GameManager>();
 		Ball = FindObjectOfType<Ball>();
 		audioManager = AudioManager.Instance.GetComponent<AudioManager>();
-
+		ballManager = FindObjectOfType<BallManager>();
+		
 		// Restrict paddle position
 		zDistance = transform.position.z - Camera.main.transform.position.z;
-		// 
 		Sprite sprite = GetComponent<SpriteRenderer>().sprite;
 		leftCorner = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, zDistance)).x + sprite.bounds.size.x / 2;
 		rightCorner = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, zDistance)).x - sprite.bounds.size.x / 2;
@@ -58,7 +59,9 @@ public class Paddle : MonoBehaviour
 	{
 		// Only play sound of collision between ball and paddle when the ball has already been served
 		if(gameManager.IsBallServed())
+		{
 			audioManager.PlayUnbreakableHitAudio();
+		}
 	}
 	// Update is called once per frame
 	private void MoveWithMouse()
@@ -81,6 +84,7 @@ public class Paddle : MonoBehaviour
 		paddlePos.x = Mathf.Clamp(ballPos, leftCorner, rightCorner);
 		gameObject.transform.position = paddlePos;
 	}
+
 	void Update()
 	{
 		if(autoPlay)
@@ -103,10 +107,11 @@ public class Paddle : MonoBehaviour
 			// すべてのボールを最初はバーの中央に配置
 			Vector3 spawnPosition = transform.position;
 			spawnPosition += new Vector3(0, 0.1f, 0);
-			GameObject obj = Instantiate(ballPrefab, spawnPosition, Quaternion.identity);
+			GameObject newBall = Instantiate(ballPrefab, ballManager.transform);
+			newBall.transform.SetPositionAndRotation(spawnPosition, Quaternion.identity);
 
 			// Rigidbody2D で方向を設定
-			Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
+			Rigidbody2D rb = newBall.GetComponent<Rigidbody2D>();
 			if(rb != null)
 			{
 				Vector2 direction = rotation * Vector2.up;

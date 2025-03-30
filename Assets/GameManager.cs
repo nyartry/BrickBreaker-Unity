@@ -5,9 +5,7 @@ using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
-	Trajectory trajectory;
 	LevelManager levelManager;
-	Ball ball;
 	[SerializeField] float ballSpeed;
 
 	private Vector3 mousePosition;
@@ -20,9 +18,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] UnityEvent onLose;
 	void Start()
 	{
-		ball = FindObjectOfType<Ball>();
 		levelManager = FindObjectOfType<LevelManager>();
-		trajectory = FindObjectOfType<Trajectory>();
 		zDept = Camera.main.transform.position.z - transform.position.z;
 		mousePosition = new Vector3(0f, 0f, zDept);
 		// イベント登録
@@ -43,44 +39,17 @@ public class GameManager : MonoBehaviour
 	{
 		if(!ballServed)
 		{
-			trajectory.Show();
 			mousePosition.x = Input.mousePosition.x;
 			mousePosition.y = Input.mousePosition.y;
-			trajectory.UpdateDots(Camera.main.WorldToScreenPoint(ball.Position), mousePosition);
 			if(Input.GetKeyDown(KeyCode.Mouse0))
 			{
-				//ServeBall();
 				Destroy(GameObject.Find("Instruction Text"));
 				Cursor.visible = false;
 				ballServed = true;
-				trajectory.Hide();
 			}
 
 		}
 	}
-
-	//void ServeBall()
-	//{
-	//	ballServed = true;
-	//	// Update mouse position at the launch time
-	//	mousePosition.x = Input.mousePosition.x;
-	//	mousePosition.y = Input.mousePosition.y;
-
-	//	Destroy(GameObject.Find("Instruction Text"));
-	//	Cursor.visible = false;
-
-	//	ball.FirstServeBall(mousePosition);
-	//}
-
-	//public void OnLosing()
-	//{
-	//	levelManager.LoadLevel("Lose");
-	//}
-
-	//public void OnWinning()
-	//{
-	//	levelManager.LoadNextLevel();
-	//}
 
 	public void InvokeWin()
 	{

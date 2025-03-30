@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 public class BricksManager : MonoBehaviour
 {
-	// Start is called before the first frame update
 	[SerializeField]
 	private int numOfBrickableBricks;
 
@@ -14,45 +13,40 @@ public class BricksManager : MonoBehaviour
 		get => numOfBrickableBricks;
 		set => numOfBrickableBricks = value;
 	}
-	//private GameManager gameManager;
-    private AudioManager audioManager;
-    private bool soundNotPlayed;
+	private AudioManager audioManager;
+	private bool soundNotPlayed;
 
-	[SerializeField] 
+	[SerializeField]
 	public UnityEvent onAllBricksDestroyed;
-	
-	
+
+
 	public void DestroyBrick()
-    {
-        numOfBrickableBricks--;
-    }
-    public int RemainBricks()
-    {
-        return numOfBrickableBricks;
-    }
-    void Start()
-    {
-        //gameManager = GameObject.FindObjectOfType<GameManager>();
-        audioManager = AudioManager.Instance.GetComponent<AudioManager>();
-        soundNotPlayed = true;
-       
-    }
-    
-    // Update is called once per frame
-    void Update()
-    {
-        if (numOfBrickableBricks <= 0)
-        {
-            if (soundNotPlayed)
-            {
-                soundNotPlayed = false;
-                audioManager.PlayClearingLevelAudio();
+	{
+		numOfBrickableBricks--;
+	}
+
+	public int RemainBricks()
+	{
+		return numOfBrickableBricks;
+	}
+
+	void Start()
+	{
+		audioManager = AudioManager.Instance.GetComponent<AudioManager>();
+		soundNotPlayed = true;
+	}
+
+	void Update()
+	{
+		if(numOfBrickableBricks <= 0)
+		{
+			if(soundNotPlayed)
+			{
+				soundNotPlayed = false;
+				audioManager.PlayClearingLevelAudio();
 
 			}
 			onAllBricksDestroyed?.Invoke();
-			//gameManager.OnWinning();
-            
-        }
-    }
-    //void CreateNewBrick()
+		}
+	}
 }

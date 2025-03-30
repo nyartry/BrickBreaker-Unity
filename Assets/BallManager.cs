@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 public class BallManager : MonoBehaviour
 {
@@ -6,14 +7,17 @@ public class BallManager : MonoBehaviour
 	[SerializeField] private Ball ball;
 	[SerializeField] private Rigidbody2D ballRb;    // BallのRigidbody2D
 	[SerializeField] private Vector3 offset = new Vector3(0, 0.5f, 0);
-	[SerializeField] private float serveForce = 300f;
+	[SerializeField] private float serveForce = 20.0f;
+
+	[SerializeField]
+	private GameObject ballPrefab;
 
 	Trajectory trajectory;
 	private Vector3 mousePosition;
 	float zDept;
 
 	bool ballServed = false;
-	
+
 	void Start()
 	{
 		ballRb.isKinematic = true; // 最初はボールを固定
@@ -21,6 +25,7 @@ public class BallManager : MonoBehaviour
 		trajectory = FindObjectOfType<Trajectory>();
 		zDept = Camera.main.transform.position.z - transform.position.z;
 		mousePosition = new Vector3(0f, 0f, zDept);
+
 	}
 
 	void Update()

@@ -5,17 +5,17 @@ using UnityEngine.Events;
 
 public class Ball : MonoBehaviour
 {
-	// Start is called before the first frame update
 	private Rigidbody2D ballBody;
 	private Paddle paddle;
-	private Vector3 ballToPaddle;
-	private GameManager gameManager;
 
 	[SerializeField]
 	float ballSpeed;
 
 	[SerializeField]
 	private GameObject ballPrefab;
+
+
+	public UnityEvent onDivision;
 
 	public Vector3 Position
 	{
@@ -27,17 +27,10 @@ public class Ball : MonoBehaviour
 
 	void Start()
 	{
-		gameManager = GameObject.FindObjectOfType<GameManager>();
 		paddle = GameObject.FindObjectOfType<Paddle>();
-
 		paddle.onItemCollectedDivision.AddListener(() => { Division(); });
 
 		ballBody = GetComponent<Rigidbody2D>();
-
-		if(gameManager.IsBallServed())
-		{
-			FirstServeBall(new Vector3(0, 1, 0));
-		}
 	}
 
 	public void AddForce(Vector2 force)
@@ -47,9 +40,8 @@ public class Ball : MonoBehaviour
 
 	public void FirstServeBall(Vector3 directorPos)
 	{
-		Vector3 ballPosition = Camera.main.WorldToScreenPoint(transform.position); // ball position in Screenpoint
+		Vector3 ballPosition = Camera.main.WorldToScreenPoint(transform.position);
 
-		// Caculate the direction
 		Vector3 direction = (directorPos - ballPosition);
 		direction = direction.normalized;
 
@@ -60,7 +52,7 @@ public class Ball : MonoBehaviour
 
 	public void CheckVelocity()
 	{
-		float minSpeed = 3f; // 最低速度
+		float minSpeed = 20.0f; // 最低速度
 
 		// 速度ベクトルの方向を維持しつつ、最低速度を保証
 		if(ballBody.velocity.magnitude < minSpeed)
@@ -71,21 +63,15 @@ public class Ball : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		if(gameManager.IsBallServed())
-		{
-			CheckVelocity();
-		}
-	}
-
-
-	public void ShotgunBurst()
-	{
+		CheckVelocity();
 	}
 
 	public void Division()
 	{
 		if(ballPrefab == null)
+		{
 			return; // プレハブが未設定なら処理しない
+		}
 
 		// 現在のボールの位置と進行方向
 		Vector3 currentPosition = transform.position;
@@ -114,12 +100,12 @@ public class Ball : MonoBehaviour
 			newDirection = Quaternion.Euler(0, 0, randomAngle) * Vector2.up; // 上向きを基準に回転
 		}
 
-		GameObject newBall = Instantiate(ballPrefab, position, Quaternion.identity);
+		GameObject newBall = Instantiate(ballPrefab, transform.parent);
 
 		Rigidbody2D rb = newBall.GetComponent<Rigidbody2D>();
 		if(rb != null)
 		{
-			rb.velocity = newDirection * 10f; // 速度を10に設定
+			rb.velocity = newDirection * 20.0f;
 		}
 	}
 }

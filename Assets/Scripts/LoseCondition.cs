@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 public class LoseCondition : MonoBehaviour
 {
-    //private GameManager gameManager;
     private BricksManager BricksManager;
     private AudioManager audioManager;
 
@@ -13,7 +12,6 @@ public class LoseCondition : MonoBehaviour
 	
 	private void Start()
     {
-        //gameManager = GameObject.FindObjectOfType<GameManager>();
         BricksManager = GameObject.FindObjectOfType<BricksManager>();
         audioManager = AudioManager.Instance;
     }
@@ -24,7 +22,6 @@ public class LoseCondition : MonoBehaviour
         {
             audioManager.PlayFailingAudio();
 			onBallEnter?.Invoke();
-			//gameManager.OnLosing();
         }
     }
 }
