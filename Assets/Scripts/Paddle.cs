@@ -21,7 +21,10 @@ public class Paddle : MonoBehaviour
 	// アイテム取得時のイベント
 	public UnityEvent onItemCollectedShotgunBurst;
 	public UnityEvent onItemCollectedDivision;
-	
+
+	// 下からの距離（ワールド単位）
+	public float bottomMargin = 0.5f;
+
 	void Start()
 	{
 		gameManager = FindObjectOfType<GameManager>();
@@ -36,7 +39,21 @@ public class Paddle : MonoBehaviour
 		rightCorner = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, zDistance)).x - sprite.bounds.size.x / 2;
 
 		onItemCollectedShotgunBurst.AddListener(() => { ShotgunBurst(); });
+		PositionPaddle();
 	}
+
+	void PositionPaddle()
+	{
+		Camera cam = Camera.main;
+		float zDist = Mathf.Abs(cam.transform.position.z); // カメラからの距離
+
+		Vector3 bottomCenter = cam.ViewportToWorldPoint(new Vector3(0.5f, 0f, zDist));
+		bottomCenter.y += bottomMargin;
+		bottomCenter.z = 0f;
+
+		transform.position = bottomCenter;
+	}
+
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
 		// Only play sound of collision between ball and paddle when the ball has already been served
