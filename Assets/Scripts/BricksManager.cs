@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BricksManager : MonoBehaviour
 {
@@ -13,10 +14,15 @@ public class BricksManager : MonoBehaviour
 		get => numOfBrickableBricks;
 		set => numOfBrickableBricks = value;
 	}
-	private GameManager gameManager;
+	//private GameManager gameManager;
     private AudioManager audioManager;
     private bool soundNotPlayed;
-    public void DestroyBrick()
+
+	[SerializeField] 
+	public UnityEvent onAllBricksDestroyed;
+	
+	
+	public void DestroyBrick()
     {
         numOfBrickableBricks--;
     }
@@ -26,7 +32,7 @@ public class BricksManager : MonoBehaviour
     }
     void Start()
     {
-        gameManager = GameObject.FindObjectOfType<GameManager>();
+        //gameManager = GameObject.FindObjectOfType<GameManager>();
         audioManager = AudioManager.Instance.GetComponent<AudioManager>();
         soundNotPlayed = true;
        
@@ -41,9 +47,10 @@ public class BricksManager : MonoBehaviour
             {
                 soundNotPlayed = false;
                 audioManager.PlayClearingLevelAudio();
-                
-            }
-            gameManager.OnWinning();
+
+			}
+			onAllBricksDestroyed?.Invoke();
+			//gameManager.OnWinning();
             
         }
     }

@@ -11,7 +11,8 @@ public class Ball : MonoBehaviour
 	private Vector3 ballToPaddle;
 	private GameManager gameManager;
 
-	[SerializeField] float ballSpeed;
+	[SerializeField]
+	float ballSpeed;
 
 	[SerializeField]
 	private GameObject ballPrefab;

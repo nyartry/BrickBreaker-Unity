@@ -302,6 +302,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85c3b2b793d5ae84093ab137c5dc98e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onBallEnter:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &314707349
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -401,6 +404,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a9c1cd55e7f23b49b274752af49bb12, type: 3}
+--- !u!50 &389142881 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 4308555479211136568, guid: 80e7d9a8de515344bb43b914eedcb517,
+    type: 3}
+  m_PrefabInstance: {fileID: 1176238540}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &389142883 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4308555479211136574, guid: 80e7d9a8de515344bb43b914eedcb517,
+    type: 3}
+  m_PrefabInstance: {fileID: 1176238540}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &561586360
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,12 +522,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &800044963 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2647264083179637183, guid: 5a9c1cd55e7f23b49b274752af49bb12,
+    type: 3}
+  m_PrefabInstance: {fileID: 314707349}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a606143220f9f804e8b564f7e8a7666a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1176238540
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1502273750}
     m_Modifications:
     - target: {fileID: 4308555479211136565, guid: 80e7d9a8de515344bb43b914eedcb517,
         type: 3}
@@ -556,6 +583,11 @@ PrefabInstance:
       propertyPath: ballSpeed
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 4308555479211136571, guid: 80e7d9a8de515344bb43b914eedcb517,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4308555479211136574, guid: 80e7d9a8de515344bb43b914eedcb517,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -594,7 +626,7 @@ PrefabInstance:
     - target: {fileID: 4308555479211136574, guid: 80e7d9a8de515344bb43b914eedcb517,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4308555479211136574, guid: 80e7d9a8de515344bb43b914eedcb517,
         type: 3}
@@ -764,6 +796,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1739035494}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1502273748
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1502273750}
+  - component: {fileID: 1502273749}
+  m_Layer: 0
+  m_Name: BallManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1502273749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502273748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf5640cacf46a8546ab560f63e72d45a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  paddle: {fileID: 8277929775278987999}
+  ball: {fileID: 1176238541}
+  ballRb: {fileID: 389142881}
+  offset: {x: 0, y: 0.5, z: 0}
+  serveForce: 30
+--- !u!4 &1502273750
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502273748}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 389142883}
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1583762016
 GameObject:
@@ -1572,20 +1653,30 @@ PrefabInstance:
       propertyPath: ball
       value: 
       objectReference: {fileID: 1176238541}
+    - target: {fileID: 8221196938420086691, guid: e27bde5e4009476418dd1059c0b20a13,
+        type: 3}
+      propertyPath: bricksManager
+      value: 
+      objectReference: {fileID: 800044963}
+    - target: {fileID: 8221196938420086691, guid: e27bde5e4009476418dd1059c0b20a13,
+        type: 3}
+      propertyPath: loseCondition
+      value: 
+      objectReference: {fileID: 209262189}
     - target: {fileID: 8221196938420086692, guid: e27bde5e4009476418dd1059c0b20a13,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.8130358
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8221196938420086692, guid: e27bde5e4009476418dd1059c0b20a13,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.16506799
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8221196938420086692, guid: e27bde5e4009476418dd1059c0b20a13,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.4225533
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8221196938420086692, guid: e27bde5e4009476418dd1059c0b20a13,
         type: 3}
@@ -1746,6 +1837,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85c3b2b793d5ae84093ab137c5dc98e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onBallEnter:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &8509634603635518073
 Transform:
   m_ObjectHideFlags: 0

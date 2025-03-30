@@ -1,15 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LoseCondition : MonoBehaviour
 {
-    private GameManager gameManager;
+    //private GameManager gameManager;
     private BricksManager BricksManager;
     private AudioManager audioManager;
-    private void Start()
+
+	public UnityEvent onBallEnter;
+	
+	private void Start()
     {
-        gameManager = GameObject.FindObjectOfType<GameManager>();
+        //gameManager = GameObject.FindObjectOfType<GameManager>();
         BricksManager = GameObject.FindObjectOfType<BricksManager>();
         audioManager = AudioManager.Instance;
     }
@@ -19,7 +23,8 @@ public class LoseCondition : MonoBehaviour
         if (BricksManager.RemainBricks() > 0)
         {
             audioManager.PlayFailingAudio();
-            gameManager.OnLosing();
+			onBallEnter?.Invoke();
+			//gameManager.OnLosing();
         }
     }
 }

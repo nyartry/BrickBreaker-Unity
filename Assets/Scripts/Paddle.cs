@@ -84,9 +84,13 @@ public class Paddle : MonoBehaviour
 	void Update()
 	{
 		if(autoPlay)
+		{
 			AutomatedPlay();
-		else if(gameManager.IsBallServed())
+		}
+		else
+		{
 			MoveWithMouse();
+		}
 	}
 
 	public void ShotgunBurst()

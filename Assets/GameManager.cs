@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,7 +13,11 @@ public class GameManager : MonoBehaviour
 	private Vector3 mousePosition;
 	float zDept;
 	bool ballServed = false;
-	// Start is called before the first frame update
+
+	[SerializeField] private LoseCondition loseCondition;
+	[SerializeField] private BricksManager bricksManager;
+	[SerializeField] UnityEvent onWin;
+	[SerializeField] UnityEvent onLose;
 	void Start()
 	{
 		ball = FindObjectOfType<Ball>();
@@ -20,6 +25,12 @@ public class GameManager : MonoBehaviour
 		trajectory = FindObjectOfType<Trajectory>();
 		zDept = Camera.main.transform.position.z - transform.position.z;
 		mousePosition = new Vector3(0f, 0f, zDept);
+		// イベント登録
+		onWin.AddListener(HandleWin);
+		onLose.AddListener(HandleLose);
+
+		loseCondition.onBallEnter.AddListener(InvokeLose);
+		bricksManager.onAllBricksDestroyed.AddListener(InvokeWin);
 	}
 
 	public bool IsBallServed()
@@ -37,31 +48,58 @@ public class GameManager : MonoBehaviour
 			mousePosition.y = Input.mousePosition.y;
 			trajectory.UpdateDots(Camera.main.WorldToScreenPoint(ball.Position), mousePosition);
 			if(Input.GetKeyDown(KeyCode.Mouse0))
-				ServeBall();
+			{
+				//ServeBall();
+				Destroy(GameObject.Find("Instruction Text"));
+				Cursor.visible = false;
+				ballServed = true;
+				trajectory.Hide();
+			}
+
 		}
 	}
 
-	void ServeBall()
+	//void ServeBall()
+	//{
+	//	ballServed = true;
+	//	// Update mouse position at the launch time
+	//	mousePosition.x = Input.mousePosition.x;
+	//	mousePosition.y = Input.mousePosition.y;
+
+	//	Destroy(GameObject.Find("Instruction Text"));
+	//	Cursor.visible = false;
+
+	//	ball.FirstServeBall(mousePosition);
+	//}
+
+	//public void OnLosing()
+	//{
+	//	levelManager.LoadLevel("Lose");
+	//}
+
+	//public void OnWinning()
+	//{
+	//	levelManager.LoadNextLevel();
+	//}
+
+	public void InvokeWin()
 	{
-		ballServed = true;
-		trajectory.Hide();
-		// Update mouse position at the launch time
-		mousePosition.x = Input.mousePosition.x;
-		mousePosition.y = Input.mousePosition.y;
-
-		Destroy(GameObject.Find("Instruction Text"));
-		Cursor.visible = false;
-
-		ball.FirstServeBall(mousePosition);
+		onWin?.Invoke();
 	}
 
-	public void OnLosing()
+	public void InvokeLose()
+	{
+		onLose?.Invoke();
+	}
+
+	void HandleWin()
+	{
+		levelManager.LoadNextLevel();
+	}
+
+	void HandleLose()
 	{
 		levelManager.LoadLevel("Lose");
 	}
 
-	public void OnWinning()
-	{
-		levelManager.LoadNextLevel();
-	}
 }
