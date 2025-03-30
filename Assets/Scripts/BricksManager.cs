@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class BricksManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    [SerializeField]
-    private int numOfBrickableBricks;
+	// Start is called before the first frame update
+	[SerializeField]
+	private int numOfBrickableBricks;
 
-    private GameManager gameManager;
+	public int NumOfBrickableBricks
+	{
+		get => numOfBrickableBricks;
+		set => numOfBrickableBricks = value;
+	}
+	private GameManager gameManager;
     private AudioManager audioManager;
     private bool soundNotPlayed;
     public void DestroyBrick()

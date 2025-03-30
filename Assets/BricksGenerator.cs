@@ -13,6 +13,8 @@ public class BricksGenerator : MonoBehaviour
 
 	private Camera mainCamera;
 
+	private BricksManager BricksManager;    // Keep track of number of brickable bricks remain, move to
+
 	void Start()
 	{
 		mainCamera = Camera.main;
@@ -21,6 +23,7 @@ public class BricksGenerator : MonoBehaviour
 			Debug.LogError("Main Camera not found!");
 			return;
 		}
+		BricksManager = GameObject.FindObjectOfType<BricksManager>();
 		GenerateBricks();
 	}
 
@@ -74,6 +77,8 @@ public class BricksGenerator : MonoBehaviour
 				}
 			}
 		}
+
+		BricksManager.NumOfBrickableBricks = transform.childCount;
 	}
 
 
