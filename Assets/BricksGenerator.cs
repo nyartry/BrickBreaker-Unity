@@ -126,6 +126,8 @@ public class BricksGenerator : MonoBehaviour
 
 	private bool ColorMatch(Color a, Color b)
 	{
+		if(Mathf.Abs(a.a - 0) < COLOR_TOLERANCE)
+			return false;
 		return Mathf.Abs(a.r - b.r) < COLOR_TOLERANCE &&
 			   Mathf.Abs(a.g - b.g) < COLOR_TOLERANCE &&
 			   Mathf.Abs(a.b - b.b) < COLOR_TOLERANCE;
