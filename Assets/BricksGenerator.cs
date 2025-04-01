@@ -1,4 +1,5 @@
 ﻿
+using System.Linq;
 using UnityEngine;
 
 public class BricksGenerator : MonoBehaviour
@@ -78,7 +79,8 @@ public class BricksGenerator : MonoBehaviour
 			}
 		}
 
-		BricksManager.NumOfBrickableBricks = transform.childCount;
+		BricksManager.NumOfBrickableBricks = transform.Cast<Transform>()
+			.Count(child => child.CompareTag("Breakable"));
 	}
 
 
