@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4308555479211136574}
+  - component: {fileID: 4308555479211136570}
   - component: {fileID: 4308555479211136569}
   - component: {fileID: 4308555479211136568}
   - component: {fileID: 4308555479211136571}
-  - component: {fileID: 4308555479211136570}
   m_Layer: 8
   m_Name: Ball
   m_TagString: Untagged
@@ -34,6 +34,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4308555479211136570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4308555479211136565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f14d6d1c14d07947a917f4c2c27ee82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballSpeed: 30
+  minSpeed: 30
+  ballPrefab: {fileID: 4308555479211136565}
+  onDivision:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!212 &4308555479211136569
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -94,7 +112,7 @@ Rigidbody2D:
   m_GameObject: {fileID: 4308555479211136565}
   m_BodyType: 0
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
+  m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
@@ -103,8 +121,8 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 0
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!58 &4308555479211136571
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -121,21 +139,3 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.21418343
---- !u!114 &4308555479211136570
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4308555479211136565}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f14d6d1c14d07947a917f4c2c27ee82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ballSpeed: 10
-  minSpeed: 10
-  ballPrefab: {fileID: 4308555479211136565}
-  onDivision:
-    m_PersistentCalls:
-      m_Calls: []

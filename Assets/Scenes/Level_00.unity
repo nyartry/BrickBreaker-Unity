@@ -133,6 +133,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Breaking Effect
       objectReference: {fileID: 0}
+    - target: {fileID: 3053374717919288579, guid: 9f06bfc6f17d8354bbe3cbb3897395ed,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3053374717919288590, guid: 9f06bfc6f17d8354bbe3cbb3897395ed,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -796,7 +801,6 @@ MonoBehaviour:
   ballRb: {fileID: 389142881}
   offset: {x: 0, y: 0.5, z: 0}
   serveForce: 1
-  ballPrefab: {fileID: 0}
 --- !u!4 &1502273750
 Transform:
   m_ObjectHideFlags: 0
@@ -1464,9 +1468,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8277929775278987999}
+  - component: {fileID: 6433894485091614157}
   - component: {fileID: 8277929775278987998}
   - component: {fileID: 8277929775278988001}
-  - component: {fileID: 6433894485091614157}
   - component: {fileID: 4435730632305669125}
   m_Layer: 0
   m_Name: Paddle

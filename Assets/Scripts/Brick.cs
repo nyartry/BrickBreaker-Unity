@@ -10,7 +10,6 @@ public class Brick : MonoBehaviour
 	private BricksManager BricksManager;    // Keep track of number of brickable bricks remain, move to
 											// next level if all brickable bricks are destroyed
 	private int hitTimes;
-	private ParticleSystem particle;    // Effect when a brick is destroyed
 	private AudioManager AudioManager;
 
 
@@ -21,7 +20,6 @@ public class Brick : MonoBehaviour
 		maxHitTimes = spriteSheet.Length + 1;
 		hitTimes = 0;
 		BricksManager = GameObject.FindObjectOfType<BricksManager>();
-		particle = GameObject.Find("Breaking Effect").GetComponent<ParticleSystem>();
 		AudioManager = AudioManager.Instance;
 
 		if(!itemPrefab)
@@ -48,11 +46,6 @@ public class Brick : MonoBehaviour
 		hitTimes++;
 		if(hitTimes >= maxHitTimes)
 		{
-			// a variable for MainModule, use MainModule to change color of particles to the color of brick
-			ParticleSystem.MainModule main = particle.main;
-			particle.transform.position = transform.position;
-			main.startColor = gameObject.GetComponent<SpriteRenderer>().color;
-			particle.Play(); // Play effect when a brick is destroyed
 			//アイテムをスポーン
 			//10分の１でアイテムが出て、そのうち、5分の１でDivisionが出る。5分の4でShotgunBurstが出る。
 			int randomSpawn = Random.Range(0, 10);
