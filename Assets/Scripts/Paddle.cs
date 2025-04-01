@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 public class Paddle : MonoBehaviour
@@ -32,7 +30,7 @@ public class Paddle : MonoBehaviour
 		Ball = FindObjectOfType<Ball>();
 		audioManager = AudioManager.Instance.GetComponent<AudioManager>();
 		ballManager = FindObjectOfType<BallManager>();
-		
+
 		// Restrict paddle position
 		zDistance = transform.position.z - Camera.main.transform.position.z;
 		Sprite sprite = GetComponent<SpriteRenderer>().sprite;
@@ -107,16 +105,11 @@ public class Paddle : MonoBehaviour
 			// すべてのボールを最初はバーの中央に配置
 			Vector3 spawnPosition = transform.position;
 			spawnPosition += new Vector3(0, 0.1f, 0);
-			GameObject newBall = Instantiate(ballPrefab, ballManager.transform);
+			Ball newBall = Instantiate(ballPrefab, ballManager.transform).GetComponent<Ball>();
 			newBall.transform.SetPositionAndRotation(spawnPosition, Quaternion.identity);
 
-			// Rigidbody2D で方向を設定
-			Rigidbody2D rb = newBall.GetComponent<Rigidbody2D>();
-			if(rb != null)
-			{
-				Vector2 direction = rotation * Vector2.up;
-				rb.velocity = direction * 5f; // 速度 5
-			}
+			Vector2 direction = rotation * Vector2.up;
+			newBall.SetDirection(direction);
 		}
 	}
 

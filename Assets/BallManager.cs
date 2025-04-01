@@ -56,8 +56,6 @@ public class BallManager : MonoBehaviour
 		mousePosition.y = Input.mousePosition.y;
 
 		Cursor.visible = false;
-
-		ball.FirstServeBall(mousePosition);
 	}
 
 }

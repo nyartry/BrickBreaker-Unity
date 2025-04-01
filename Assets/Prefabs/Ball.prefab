@@ -134,4 +134,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballSpeed: 10
+  minSpeed: 10
   ballPrefab: {fileID: 4308555479211136565}
+  onDivision:
+    m_PersistentCalls:
+      m_Calls: []

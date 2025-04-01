@@ -12,6 +12,10 @@ public class Ball : MonoBehaviour
 	float ballSpeed;
 
 	[SerializeField]
+	float minSpeed = 10.0f; // 最低速度
+
+
+	[SerializeField]
 	private GameObject ballPrefab;
 
 
@@ -38,22 +42,8 @@ public class Ball : MonoBehaviour
 		ballBody.AddForce(force, ForceMode2D.Impulse);
 	}
 
-	public void FirstServeBall(Vector3 directorPos)
-	{
-		Vector3 ballPosition = Camera.main.WorldToScreenPoint(transform.position);
-
-		Vector3 direction = (directorPos - ballPosition);
-		direction = direction.normalized;
-
-		Vector2 force = new Vector2(direction.x * ballSpeed, direction.y * ballSpeed);
-
-		AddForce(force);
-	}
-
 	public void CheckVelocity()
 	{
-		float minSpeed = 20.0f; // 最低速度
-
 		// 速度ベクトルの方向を維持しつつ、最低速度を保証
 		if(ballBody.velocity.magnitude < minSpeed)
 		{
@@ -105,7 +95,19 @@ public class Ball : MonoBehaviour
 		Rigidbody2D rb = newBall.GetComponent<Rigidbody2D>();
 		if(rb != null)
 		{
-			rb.velocity = newDirection * 20.0f;
+			rb.velocity = newDirection * ballSpeed;
 		}
 	}
+
+	public void SetDirection(Vector2 direction)
+	{
+		if(ballBody == null)
+		{
+			ballBody = GetComponent<Rigidbody2D>();
+		}
+		direction.Normalize();
+		AddForce(direction * ballSpeed);
+	}
+
+
 }
