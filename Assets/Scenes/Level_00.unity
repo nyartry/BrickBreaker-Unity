@@ -379,12 +379,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a9c1cd55e7f23b49b274752af49bb12, type: 3}
---- !u!50 &389142881 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 4308555479211136568, guid: 80e7d9a8de515344bb43b914eedcb517,
-    type: 3}
-  m_PrefabInstance: {fileID: 1176238540}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &389142883 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4308555479211136574, guid: 80e7d9a8de515344bb43b914eedcb517,
@@ -798,7 +792,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   paddle: {fileID: 8277929775278987999}
   ball: {fileID: 1176238541}
-  ballRb: {fileID: 389142881}
   offset: {x: 0, y: 0.5, z: 0}
   serveForce: 1
 --- !u!4 &1502273750

@@ -5,7 +5,6 @@ public class BallManager : MonoBehaviour
 {
 	[SerializeField] private Transform paddle;      // PaddleのTransform
 	[SerializeField] private Ball ball;
-	[SerializeField] private Rigidbody2D ballRb;    // BallのRigidbody2D
 	[SerializeField] private Vector3 offset = new Vector3(0, 0.5f, 0);
 	[SerializeField] private float serveForce = 20.0f;
 
