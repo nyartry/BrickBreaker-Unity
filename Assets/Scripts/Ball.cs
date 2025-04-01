@@ -109,5 +109,4 @@ public class Ball : MonoBehaviour
 		AddForce(direction * ballSpeed);
 	}
 
-
 }
